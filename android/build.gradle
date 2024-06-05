@@ -16,7 +16,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -24,7 +24,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.google.protobuf'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 19
@@ -40,7 +40,7 @@ android {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.11.4'
+        artifact = 'com.google.protobuf:protoc:4.27.0'
     }
     generateProtoTasks {
         all().each { task ->
