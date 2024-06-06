@@ -78,6 +78,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
 
     private static final int REQUEST_FINE_LOCATION_PERMISSIONS = 1452;
     private static final int REQUEST_BLUETOOTH_CONNECT_PERMISSIONS = 1309;
+    private static final int REQUEST_BLUETOOTH_SCAN_PERMISSIONS = 0913;
     static final private UUID CCCD_ID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
     private final Map<String, BluetoothDeviceCache> mDevices = new HashMap<>();
     private LogLevel logLevel = LogLevel.EMERGENCY;
@@ -258,6 +259,18 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
                                     Manifest.permission.BLUETOOTH_CONNECT
                             },
                             REQUEST_BLUETOOTH_CONNECT_PERMISSIONS);
+                    pendingCall = call;
+                    pendingResult = result;
+                    break;
+                }
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(
+                            activityBinding.getActivity(),
+                            new String[] {
+                                    Manifest.permission.BLUETOOTH_SCAN
+                            },
+                            REQUEST_BLUETOOTH_SCAN_PERMISSIONS);
                     pendingCall = call;
                     pendingResult = result;
                     break;
